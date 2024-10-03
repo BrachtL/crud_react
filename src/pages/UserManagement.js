@@ -1,9 +1,6 @@
-// /src/pages/UserManagement.js
-
 import React, { useEffect, useState } from 'react';
 import { getUsers, insertUser, updateUser, deleteUser, getUserById } from '../api';
-import UserForm from '../components/UserForm';
-import UserList from '../components/UserList';
+import UserList from '../components/UserList'; 
 import '../styles/UserManagement.css';
 
 const UserManagement = () => {
@@ -18,7 +15,7 @@ const UserManagement = () => {
 
     const fetchUsers = async () => {
         const data = await getUsers();
-        setUsers(data.users); 
+        setUsers(data.users);
     };
 
     const handleInsert = async () => {
@@ -46,37 +43,77 @@ const UserManagement = () => {
     };
 
     return (
-        <div>
-            <h1>User Management</h1>
+        <div className="user-management-container">
+            <h1 className="title">User Management</h1>
 
-            <UserForm 
-                user={newUser} 
-                setUser={setNewUser} 
-                handleSubmit={handleInsert} 
-            />
+            <div className="form-container">
+                <h2>Add New User</h2>
+                <input 
+                    type="text" 
+                    placeholder="First Name" 
+                    value={newUser.first_name} 
+                    onChange={(e) => setNewUser({ ...newUser, first_name: e.target.value })} 
+                    className="input-field"
+                />
+                <input 
+                    type="email" 
+                    placeholder="Email" 
+                    value={newUser.email} 
+                    onChange={(e) => setNewUser({ ...newUser, email: e.target.value })} 
+                    className="input-field"
+                />
+                <input 
+                    type="text" 
+                    placeholder="Phone" 
+                    value={newUser.phone} 
+                    onChange={(e) => setNewUser({ ...newUser, phone: e.target.value })} 
+                    className="input-field"
+                />
+                <button onClick={handleInsert} className="action-button">Add User</button>
+            </div>
 
-            <h2>Get User by ID</h2>
-            <input 
-                type="text" 
-                placeholder="Enter User ID" 
-                value={userIdToFetch} 
-                onChange={(e) => setUserIdToFetch(e.target.value)} 
-            />
-            <button onClick={handleGetUserById}>Fetch User</button>
+            <div className="form-container">
+                <h2>Get User by ID</h2>
+                <input 
+                    type="text" 
+                    placeholder="Enter User ID" 
+                    value={userIdToFetch} 
+                    onChange={(e) => setUserIdToFetch(e.target.value)} 
+                    className="input-field"
+                />
+                <button onClick={handleGetUserById} className="action-button">Fetch User</button>
 
-            {selectedUser && (
-                <div>
-                    <h3>Edit User</h3>
-                    <UserForm 
-                        user={selectedUser} 
-                        setUser={setSelectedUser} 
-                        handleSubmit={handleUpdateUser} 
-                    />
-                </div>
-            )}
+                {selectedUser && (
+                    <div className="edit-user-container">
+                        <h3>Edit User</h3>
+                        <input 
+                            type="text" 
+                            value={selectedUser.first_name} 
+                            onChange={(e) => setSelectedUser({ ...selectedUser, first_name: e.target.value })} 
+                            className="input-field"
+                        />
+                        <input 
+                            type="email" 
+                            value={selectedUser.email} 
+                            onChange={(e) => setSelectedUser({ ...selectedUser, email: e.target.value })} 
+                            className="input-field"
+                        />
+                        <input 
+                            type="text" 
+                            value={selectedUser.phone} 
+                            onChange={(e) => setSelectedUser({ ...selectedUser, phone: e.target.value })} 
+                            className="input-field"
+                        />
+                        <button onClick={handleUpdateUser} className="action-button">Update User</button>
+                    </div>
+                )}
+            </div>
 
-            <h2>Users List</h2>
-            <UserList users={users} handleDelete={handleDelete} />
+            <div className="user-list-container">
+                <h2>Users List</h2>
+                {/* Use the UserList component to render the list */}
+                <UserList users={users} handleDelete={handleDelete} />
+            </div>
         </div>
     );
 };

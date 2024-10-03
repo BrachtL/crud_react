@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000'; 
+const API_URL = 'http://192.168.2.10:3000'; //'http://localhost:3000'; 
 
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 
