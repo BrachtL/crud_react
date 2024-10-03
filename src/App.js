@@ -1,7 +1,7 @@
-// src/App.js
+// /src/App.js
 
 import React from 'react';
-import UserManagement from './userManagement';
+import UserManagement from './pages/UserManagement';
 
 function App() {
     return (
