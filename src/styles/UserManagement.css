@@ -82,3 +82,9 @@
 .delete-button:hover {
   background-color: #c82333;
 }
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 4px;
+}
